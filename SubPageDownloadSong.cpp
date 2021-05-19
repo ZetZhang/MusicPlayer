@@ -272,6 +272,9 @@ void SubPageDownloadSong::OnLrcLyricPathChanged()
                 } else {
                     QMessageBox::information(Q_NULLPTR, "提示", "创建目录成功！");
                 }
+            } else {
+                downloadLocation = downloadLocation_rollback;
+                editRawLyricPanelSavePath->setText(downloadLocation);
             }
 
         QSettings mysettings("./MusicPlayer.ini",QSettings::IniFormat);

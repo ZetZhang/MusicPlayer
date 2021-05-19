@@ -46,7 +46,9 @@ struct SongSearchResult
     QString strUnexpectedResultTip;//意外结果的提示
 };
 
-//储存获取的单个歌词信息
+/**
+ * @brief  储存获取的单个歌词信息
+ */
 struct LyricInfo
 {
     QString strPlaneText;

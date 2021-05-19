@@ -1,5 +1,6 @@
 ﻿#include "LrcProcessor.h"
 #include "UnicodeReader.h"
+
 #include <QRegExp>
 #include <QFile>
 
@@ -16,7 +17,7 @@ bool LrcProcessor::LoadFromFile(QString lyricFilePath)
 
     QString content;
     UnicodeReader unicodeReader;
-    if(!unicodeReader.ReadFromFile(lyricFilePath,content))
+    if(!unicodeReader.ReadFromFile(lyricFilePath, content))
         return false;
 
     QRegExp sepRegExp = QRegExp("\n|\r");               //linux\mac\windows 换行符号
@@ -58,12 +59,9 @@ void LrcProcessor::LoadFromRawLines(QVector<QString> lines)
         QVector<QPair<int, QString>> lrcLyricsTemp; //临时存放初步收集的可能无序的结果
 
         //这里判断的标准以 比较广泛的方式支持读取进来
-
         //网易云标准上传的歌词格式只有 带时间标签的行，而且一行一个时间 [xx:xx.xx]  xxx
-
         //广泛的lrc格式，可能包含 [ar:歌手名]、[ti:歌曲名]、[al:专辑名]、[by:编辑者(指lrc歌词的制作人)]、[offset:时间补偿值]
-        //                    时间标签，形式为“[mm:ss]”或“[mm:ss.ff]”
-        //                  一行可能包含多个时间标签
+        //时间标签，形式为“[mm:ss]”或“[mm:ss.ff]” 一行可能包含多个时间标签
 
         QStringList infoLabels;     //储存非歌词行的信息 [ar:歌手名] 、[offset:时间补偿值] 等
 

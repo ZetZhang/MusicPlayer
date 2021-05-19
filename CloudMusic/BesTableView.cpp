@@ -183,7 +183,7 @@ void BesTableView::OnProgressChanged(QString speed, int percentage, QVariant dat
 
     int nSongId = data.toInt();
 
-    QVector<SONGINFO>& infos =m_model->DataVector();
+    QVector<SONGINFO>& infos = m_model->DataVector();
     for(SONGINFO& info: infos)
     {
         if(info.nID == nSongId)

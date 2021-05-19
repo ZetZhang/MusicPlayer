@@ -56,7 +56,7 @@ HEADERS += \
     LyricWidget.h \
     SubPageDownloadSong.h \
     SettingManager.h \
-    SliderWithClick.h
+    sliderwithclick.h
 
 FORMS += \
     MusicListDialog.ui \

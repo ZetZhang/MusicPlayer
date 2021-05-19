@@ -45,10 +45,10 @@ bool NetworkAccess::SyncDownloadString(const QString strUrl, QString &target, QU
 
     QNetworkRequest request;
     request.setUrl(url);
-    request.setRawHeader("Accept","*/*");
-    request.setRawHeader("Accept-Language","zh-CN");
-    request.setRawHeader("User-Agent","Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 6.1; WOW64; Trident/5.0)");
-    request.setRawHeader("Content-Type","application/x-www-form-urlencoded");
+    request.setRawHeader("Accept", "*/*");
+    request.setRawHeader("Accept-Language", "zh-CN");
+    request.setRawHeader("User-Agent", "Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 6.1; WOW64; Trident/5.0)");
+    request.setRawHeader("Content-Type", "application/x-www-form-urlencoded");
 
     QNetworkAccessManager manager;
     QNetworkReply *reply= manager.get(request);
@@ -58,15 +58,14 @@ bool NetworkAccess::SyncDownloadString(const QString strUrl, QString &target, QU
     loop.exec();
 
     bool bRet = false;
-    if(reply->error()==QNetworkReply::NoError) {
-        QByteArray byte=reply->readAll();
+    if(reply->error() == QNetworkReply::NoError) {
+        QByteArray byte = reply->readAll();
         if(targetIsFile) {
             //存在target指定的文件中
             QFile file;
             file.setFileName(target);
             if (!file.open(QIODevice::WriteOnly)) {
                 qDebug() << "Problem opening save file "<< target  << " for download "<< strUrl;
-
                 return false;
             } else {
                 file.write(byte);
@@ -173,7 +172,7 @@ void NetworkAccess::startNextDownload()
 
         DownloadInfo info = downloadQueue.dequeue();
         emit(sig_fileOpenErrorWhenSave(info.data));
-        emit sig_finishDownload(info.data,DOWNLOAD_FINISH_STATUS::LOCAL_STORAGE_FAIL );
+        emit sig_finishDownload(info.data, DOWNLOAD_FINISH_STATUS::LOCAL_STORAGE_FAIL);
 
         startNextDownload();
         return;                 // skip this download
@@ -211,12 +210,12 @@ void NetworkAccess::downloadProgress(qint64 bytesReceived, qint64 bytesTotal)
     qDebug()<< strSpeed;
 
     int percent;
-    if(bytesReceived == 0|| bytesTotal == 0)
+    if(bytesReceived == 0 || bytesTotal == 0)
         percent = 0;
     else
-        percent =bytesReceived * 100 /bytesTotal;
+        percent = bytesReceived * 100 / bytesTotal;
 
-    emit sig_progressChanged(strSpeed, percent ,downloadQueue.head().data);
+    emit sig_progressChanged(strSpeed, percent, downloadQueue.head().data);
 }
 
 void NetworkAccess::downloadFinished()
@@ -235,7 +234,7 @@ void NetworkAccess::downloadFinished()
         bDeleteFile = true;
         fileToDelete = info.strSaveFilePath;
         emit sig_netErrorWhenDownload(info.data);
-        emit sig_finishDownload(info.data,DOWNLOAD_FINISH_STATUS::NET_WORK_ERROR );
+        emit sig_finishDownload(info.data,DOWNLOAD_FINISH_STATUS::NET_WORK_ERROR);
     } else {
 
         int statusCode = currentDownload->attribute(QNetworkRequest::HttpStatusCodeAttribute).toInt();
@@ -251,7 +250,7 @@ void NetworkAccess::downloadFinished()
                 DownloadInfo info = downloadQueue.dequeue();
                 bDeleteFile = true;
                 fileToDelete = info.strSaveFilePath;
-                emit sig_finishDownload(info.data,DOWNLOAD_FINISH_STATUS::NETEASE_MUSIC_NOT_FOUND );
+                emit sig_finishDownload(info.data,DOWNLOAD_FINISH_STATUS::NETEASE_MUSIC_NOT_FOUND);
             }
             else
                 downloadQueue.head().strUrl = strUrl;
