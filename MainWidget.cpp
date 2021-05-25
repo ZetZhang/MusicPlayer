@@ -68,6 +68,7 @@ void MainWidget::paintEvent(QPaintEvent *event)
  */
 void MainWidget::init_UI()
 {
+    this->setWindowTitle("MyMusicPlayer");
     auto style = QStyleFactory::create("dsemilight");
     setStyle(style);
     setWindowIcon(QIcon(":/MusicPlayer.ico"));
@@ -100,8 +101,6 @@ void MainWidget::init_subpage()
 {
     subpage = new SubPageDownloadSong(this);
     subpage->setObjectName("subPageDownloadSong");
-//     subpage->setStyleSheet("color: rgb(255, 255, 255); background-color: rgba(255, 255, 255, 40);\n");
-//     subpage->setStyleSheet("color: rgb(255, 255, 255);\n");
     ui->stackedWidget->addWidget(subpage);
 }
 
