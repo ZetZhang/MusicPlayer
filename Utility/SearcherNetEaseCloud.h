@@ -28,6 +28,7 @@ public:
     }
 
     virtual ~ISearcher(){}
+
 protected:
     QString m_strLastResult;
 };
@@ -47,7 +48,6 @@ public:
     static bool GetSongListFromJson(QString strJsonRes, QVector<SONGINFO> &vecSongList);
 
 private:
-
     //从单个歌词json数据获得歌词
     bool GetOneLyricFromJson(QString strLyricJson,  LyricInfo& oneLyricInfo);
     //从歌词文本缓存获取 歌词 信息

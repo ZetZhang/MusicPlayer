@@ -27,14 +27,13 @@ public:
     QVariant data;
 };
 
-class NetworkAccess :public QObject
+class NetworkAccess : public QObject
 {
     Q_OBJECT
 public:
     NetworkAccess() {  }
 
     bool DownloadFile(const QString strUrl, const QString strSaveAs, QVariant data);
-
     /* get 请求下载，下载完成后才返回 */
     static bool SyncDownloadString(const QString strUrl, QString& target, QUrlQuery query = QUrlQuery(),bool targetIsFile = false);
     /* post 请求下载，下载完成后才返回 */
@@ -63,7 +62,6 @@ public slots:
     void downloadReadyRead();
 
 public:
-
     QNetworkAccessManager manager;
     QQueue<DownloadInfo> downloadQueue;
     QNetworkReply *currentDownload;
