@@ -284,9 +284,6 @@ void BesTableView::initConnection()
     connect(m_buttonDelegate, &BesButtonDelegate::sig_search_ncm_lyric, [=](int row){
         OnSearchNcmLyric(m_model->DataVector().at(row));
     });
-//    connect(m_buttonDelegate, &BesButtonDelegate::sig_setMusicPathToMakingPage, [=](QString musicPath) {
-//        emit sig_setMusicPathToMakingPage(musicPath);
-//    });
 
     connect(&net, &NetworkAccess::sig_finishDownload, this, &BesTableView::OnFinishedDownload);
     connect(&net, &NetworkAccess::sig_progressChanged, this, &BesTableView::OnProgressChanged);
